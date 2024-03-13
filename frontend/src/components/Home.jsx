@@ -130,6 +130,8 @@ const home = () => {
       });
   };
 
+
+
   return (
     <div className="flex flex-col justify-center items-center mt-4">
       {data.map((e, id) => {

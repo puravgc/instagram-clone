@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv").config();
-const jwtSecret = process.env.JWT_SECRET
+const { Jwt_secret } = require("../keys");
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 
@@ -11,7 +11,7 @@ module.exports = (req,res,next)=>{
     return res.status(401).json({error:'You must be signed in'})
   }
   const token = authorization.replace("Bearer ","")
-  jwt.verify(token,jwtSecret,(err,payload)=>{
+  jwt.verify(token,Jwt_secret,(err,payload)=>{
     if(err){
       return res.status(401).json({error:'You must be signed in'})
     }

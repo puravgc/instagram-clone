@@ -5,8 +5,7 @@ const USER = mongoose.model("User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const requireLogin = require("../middlewares/requireLogin");
-const jwtToken = require("../keys");
-
+const { Jwt_secret } = require("../keys");
 
 router.post("/signup", async (req, res) => {
   const { name, username, email, password } = req.body;
@@ -51,7 +50,7 @@ router.post("/signin", async (req, res) => {
     let isMatch = await bcrypt.compare(password, userData.password);
 
     if (isMatch) {
-      const token = jwt.sign({ _id: userData.id }, jwtToken);
+      const token = jwt.sign({ _id: userData.id }, Jwt_secret);
       const { _id, name, email, username } = userData;
       return res
         .status(200)

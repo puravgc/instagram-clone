@@ -43,7 +43,7 @@ const CreatePost = () => {
   }, []);
 
   const postDetails = () => {
-    setLoading(true)
+    setLoading(true); // Set loading to true before making the Cloudinary request
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "insta-clone");
@@ -54,13 +54,13 @@ const CreatePost = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setLoading(false);
+        setLoading(false); // Set loading to false after Cloudinary request is complete
         setimageUrl(data.url);
-
+        // Now imageUrl is set, and the useEffect will trigger the post to the backend
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
+        setLoading(false); // Set loading to false if there's an error
       });
   };
 
