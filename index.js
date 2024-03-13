@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(require("./routes/auth"));
 app.use(require("./routes/createPost"));
 app.use(require("./routes/User"));
-mongoose.connect(process.env.URI);
+mongoose.connect(mongoUrl);
 mongoose.connection.on("connected", () => {
   console.log("successfully connected to the db");
 });
